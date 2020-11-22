@@ -1,0 +1,11 @@
+{
+  "presets": [
+    // "@babel/preset-env",
+    "@babel/preset-react" //包含：@babel/plugin-syntax-jsx、@babel/plugin-transform-react-jsx、@babel/plugin-transform-react-display-name。url：https://www.babeljs.cn/docs/babel-preset-react
+  ],
+  "plugins": [
+    // "@babel/plugin-transform-runtime",
+    // "transform-vue-jsx",
+  ],
+  "comments": false
+}
