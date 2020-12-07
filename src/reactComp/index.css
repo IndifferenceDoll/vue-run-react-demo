@@ -1,28 +1,27 @@
 .container{
-    width: 100%;
-    height: 300px;
-    background: red;
+    width: 96vw;
+    height: 760px;
+    background: white;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
     box-sizing: border-box;
 }
 .container .text-header{
     width: 100%;
     text-align: center;
     font-size: 35px;
-    color: white;
+    color: black;
     margin-bottom: 10px;
 }
 .container .father-msg{
     width: 100%;
     height: 50px;
-    margin: 0;
-    margin-bottom: 20px;
+    margin: 0 auto;
     line-height: 50px;
     font-size: 25px;
     color: black;
+    text-align: center;
 }
 .container .time-out{
     width: 50px;
@@ -31,5 +30,34 @@
     font-size: 50px;
     line-height: 50px;
     text-align: center;
-    color: white;
+    color: black;
+}
+.container .efw-container{
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display:flex;
+}
+.container .canvas-container{
+  height: 100%;
+  flex:1;
+  flex-shrink: 0;
+}
+.container .container-gap{
+  height: 100%;
+  width: 0;
+  border: 1px solid black;
+}
+.container .svg-container{
+  height: 100%;
+  flex:1;
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.container .svg-container svg{
+  border: 1px solid black;
+  margin: 50px 50px 50px;
+  transform:scale(1,-1);
 }
