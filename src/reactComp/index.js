@@ -3,6 +3,7 @@ import style from './index.css';
 import json from './point.json';
 
 const { strokes = [] } = json;
+const colorMap = [ 'red', 'blue', 'green' ];
 
 export default function ChildComp (props = {}) {
   const { message = '' } = props;
@@ -20,14 +21,25 @@ export default function ChildComp (props = {}) {
   }, [ time ]);
   ////
   const svgContainer = useRef(null);
-  const createSvgNode = (path) => {
+  const createSvgNode = (path, i) => {
+    const svgWidth = 100;
+    const svgHeight = 100;
+    const viewBoxWidth = 1024;
+    const viewBoxHeight = 768;
+    const fillColor = colorMap[ i % colorMap.length ];
+    const strokeColor = colorMap.reverse()[ i % colorMap.length ];
     let svgHTML = `
-      <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768">
-        <path d="${path}"></path>
+      <svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" fill="${fillColor}">
+        <path stroke="${strokeColor}" stroke-width="10" d="${path}"></path>
       </svg>
     `;
-    let svg = (new DOMParser()).parseFromString(svgHTML, 'image/svg+xml');
-    svgContainer.current.appendChild(svg.firstChild);
+    let svg = (new DOMParser()).parseFromString(svgHTML, 'image/svg+xml').firstChild;
+    svgContainer.current.appendChild(svg);
+    const svgBBox = svg.getBBox();//getBBox获得的x/y/width/height四个属性的单位不是1px，而是(view中宽度除以svg的width)px，也就是说会缩放
+    const { x = 0, y = 0, width = 0, height = 0 } = svgBBox;
+    const xCenter = x + (width) / 2;
+    const yCenter = y + (height) / 2;
+    svg.setAttribute('viewBox', `${-(viewBoxWidth / 2 - xCenter)} ${-(viewBoxHeight / 2 - yCenter)} ${viewBoxWidth} ${viewBoxHeight}`)
   }
   useEffect(() => {
     strokes.forEach(createSvgNode);
